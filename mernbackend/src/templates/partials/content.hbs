@@ -2,17 +2,24 @@
       <div class="forms-container">
         <div class="signin-signup">
             <!-- signin section -->
-          <form action="" class="signin-form" method="post">
+          <form action="/login" class="signin-form" method="POST">
             <h2 class="title">SignIn</h2>
+            <!-- input fields -->
+             {{!-- username for signin --}}
             <div class="input-field">
-              <i class="fa-solid fa-user"></i>
-              <input type="text" placeholder="username" />
+                <i class="fa-solid fa-user"></i>
+                <input name = 'usernameSignin' type="text"
+                 placeholder="username" />
             </div>
+            {{!-- password for signin --}}
             <div class="input-field">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" placeholder="password" />
+              <input name="password" type="password" 
+              
+              placeholder="password" />
             </div>
             <input type="submit" value="Login" class="btn" />
+            {{!-- social media --}}
             <p class="social-text">or sign in with social media credentials</p>
             <div class="social-media">
               <a href="#" class="social-icon"
@@ -32,25 +39,30 @@
           <!--
             signup section
           -->
-          <form action="" class="signup-form" method="post">
+          <form action="/register" class="signup-form" method="POST">
             <h2 class="title">SignUp</h2>
             <div class="input-field">
               <i class="fa-solid fa-user"></i>
-              <input type="text" placeholder="username" />
-            </div>
-            <div class="input-field">
-                <i class="fa-solid fa-envelope"></i>
-                <input type="text" placeholder="email" />
-              </div>
-              <div class="input-field">
-                <i class="fa-solid fa-phone"></i>
-                <input type="text" placeholder="phone" />
-              </div>
-            <div class="input-field">
-              <i class="fa-solid fa-lock"></i>
-              <input type="password" placeholder="password" />
-            </div>
-            <input type="submit" value="Signup" class="btn" />
+              {{!-- username signup --}}
+                <input name="usernameSignup" type="text" placeholder="username" />
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-envelope"></i>
+                    {{!-- email input --}}
+                    <input name="email" type="text" placeholder="email" />
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone"></i>
+                    {{!-- phone input --}}
+                    <input name="phone" type="text" placeholder="phone" />
+                </div>
+                <div class="input-field">
+                <i class="fa-solid fa-lock"></i>
+                {{!-- password input  --}}
+                <input name="password" type="password" placeholder="password" />
+                </div>
+                {{!-- submit button --}}
+                <input  type="submit" value="Signup" class="btn" />
             <p class="social-text">or sign up with social media credentials</p>
             <div class="social-media">
               <a href="#" class="social-icon"
