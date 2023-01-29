@@ -64,6 +64,7 @@ app.post('/register',async (req,res)=>{
                 userName,email,phone,password
                 
             })
+        const token =   await  user.createAuthToken();
             const result = await user.save();
             res.status(201).render('index');
             

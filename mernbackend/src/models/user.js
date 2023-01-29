@@ -2,6 +2,7 @@ const { text } = require('body-parser')
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const { brotliCompressSync } = require('zlib')
 const userSchema = mongoose.Schema({
     userName : {
@@ -28,9 +29,36 @@ const userSchema = mongoose.Schema({
         
         required:true,
         
-    }
+    },
+    tokens :[
+        {
+            token : {type : String,required : true}
+        }
+    ]
 
 })
+/**
+ * generating authentication token using a middleware and methods which are used on documents and statics are used with models
+ */
+
+ userSchema.methods.createAuthToken = async function(){
+    try {
+        const token = await jwt.sign({_id : this._id},'mynameispawansharmaandiamasoftwareengineer');
+        this.tokens = this.tokens.concat({token});
+        await this.save();
+        console.log('token = '+token)
+        return token;
+        
+    } catch (error) {
+        // res.send('error in token creation =  ' + error);
+        console.log(error);
+        
+    }
+ }
+
+/**
+ * hashing the password before saving using middleware
+ */
 userSchema.pre('save',async function(next){
         if(this.isModified('password')){
             this.password = await bcrypt.hash(this.password,10);
