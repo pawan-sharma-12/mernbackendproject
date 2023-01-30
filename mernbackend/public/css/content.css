@@ -74,7 +74,7 @@
   
   .input-field input {
     background-color: none;
-    background: none;
+    background: transparent;
     border: none;
     outline: none;
     line-height: 1;

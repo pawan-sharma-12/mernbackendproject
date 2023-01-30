@@ -1,14 +1,18 @@
+
 const express = require('express')
 const hbs = require('hbs');
+const fs = require('fs')
 const bcrypt = require('bcryptjs')
-const { url } = require('inspector');
-require('./db/conn')
-const path = require('path');
-const Users  = require('./models/user');
-const { hash } = require('bcrypt');
-const { resourceLimits } = require('worker_threads');
-const app = express();
 
+require('./db/conn')
+ const path = require('path');
+// const dotenv_path = path.join(__dirname,'../.env');
+require('dotenv').config()
+const Users  = require('./models/user');
+
+
+const app = express();
+  
 const port = process.env.port || 8000;
 const index_path = path.join(__dirname ,'../public')
 const views_path = path.join(__dirname ,'/templates/views')
@@ -91,7 +95,14 @@ app.post('/login',async (req,res)=>{
             console.log(passwordDb);
             const match = await bcrypt.compare(password,passwordDb);
             console.log('match = ' + match)
-            match ? res.render('login') : res.send('invalid credentials');
+            
+            if(match){
+                const token =   await  result.createAuthToken();
+                res.render('login') 
+
+            }else{
+                res.send('invalid credentials')
+            }
         }
         
         
@@ -104,3 +115,23 @@ app.post('/login',async (req,res)=>{
 app.listen(port,()=>{
     console.log('listening to the port ' + `${port}`)
 })
+
+
+/**
+ * showing dot env variable
+ */
+// const sec_key = process.env.SECRET_KEY;
+// console.log('secret key = '+ sec_key);
+
+
+// console.log('path = '+ path.join(__dirname,'../.env'))
+
+
+/**
+ *  Reading the dot env file */
+
+// const val = fs.readFileSync(dotenv_path,'utf-8');
+// console.log('read the file = '+val)
+
+
+
