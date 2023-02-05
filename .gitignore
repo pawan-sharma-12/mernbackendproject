@@ -1,5 +1,5 @@
-node_modules/*
+error.log
 
 .env
 
-error.log
+node_modules
