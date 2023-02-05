@@ -120,8 +120,8 @@ app.listen(port,()=>{
 /**
  * showing dot env variable
  */
-// const sec_key = process.env.SECRET_KEY;
-// console.log('secret key = '+ sec_key);
+ const sec_key = process.env.SECRET_KEY;
+ console.log('secret key = '+ sec_key);
 
 
 // console.log('path = '+ path.join(__dirname,'../.env'))
