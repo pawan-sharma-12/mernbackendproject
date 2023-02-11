@@ -62,12 +62,15 @@ const userSchema = mongoose.Schema({
 /**
  * hashing the password before saving using middleware
  */
-userSchema.pre('save',async function(next){
-        if(this.isModified('password')){
-            this.password = await bcrypt.hash(this.password,10);
+const passwordHasher = () =>{
+        userSchema.pre('save',async function(next){
+            if(this.isModified('password')){
+                this.password = await bcrypt.hash(this.password,10);
 
-        }
-        next();
-})
+            }
+            next();
+    })
+}
+passwordHasher();
 const Users = new mongoose.model('User',userSchema);
 module.exports = Users;
